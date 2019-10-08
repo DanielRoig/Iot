@@ -7,9 +7,17 @@ function createDB() {
 	}
 
 	myDB.transaction(function (tran) {
-		tran.executeSql('CREATE TABLE IF NOT EXISTS Products (id INTEGER PRIMARY KEY, Name VARCHAR)');
-		tran.executeSql('CREATE TABLE IF NOT EXISTS Brands (id INTEGER PRIMARY KEY, Name VARCHAR)');
+
+		tran.executeSql('DROP TABLE Products');
+		tran.executeSql('DROP TABLE Brands');
+
+		tran.executeSql('CREATE TABLE IF NOT EXISTS Products (ID INTEGER PRIMARY KEY, Name VARCHAR, BrandID INTEGER, FOREIGN KEY (BrandID) REFERENCES Brands(ID))');
+		tran.executeSql('CREATE TABLE IF NOT EXISTS Brands (ID INTEGER PRIMARY KEY, Name VARCHAR)');
 
 		tran.executeSql('insert into Brands (Name) values ("Apple")');
+		tran.executeSql('insert into Brands (Name) values ("Samsung")');
+		
+		tran.executeSql('insert into Products (Name, BrandID) values ("iPhone", 1)');
+		tran.executeSql('insert into Products (Name, BrandID) values ("Galaxy S10", 2)');
 	});
 }
