@@ -48,13 +48,11 @@
       <form class="mb-4">
         <div class="form-row">
           <div class="form-group col-md-3">
-            <label>Create</label>
+            <label>Create product</label>
             <input id="createInput" type="text" class="form-control mb-2" placeholder="Product">
-
             <select id="createDropdown" class="form-control">
               <option value="" disabled selected>Choose brand...</option>
             </select>
-
           </div>
         </div>
         <button id="createButton" type="button" class="btn btn-success">Create</button>
@@ -62,38 +60,32 @@
 
       <form class="mb-4">
         <div class="form-row">
-          <div class="form-group col-md-3">
-            <label>Read</label>
-
-            <select class="form-control">
-              <option selected>Choose brand...</option>
-              <option>...</option>
+          <div id="textBox" class="form-group col-md-3">
+            <label>Read brand</label>
+            <select id="readDropdown" class="form-control">
+              <option value="" disabled selected>Choose brand...</option>
             </select>
-
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Read</button>
+        <button id="readButton" type="button" class="btn btn-primary">Read</button>
       </form>
 
       <form class="mb-4">
         <div class="form-row">
           <div class="form-group col-md-3">
-            <label>Delete</label>
-
-            <select class="form-control mb-2">
-              <option selected>Choose brand</option>
-              <option>...</option>
+            <label>Delete product</label>
+            <select id="deleteDropdown" class="form-control">
+              <option value="" disabled selected>Choose brand...</option>
             </select>
-
             <select class="form-control">
               <option selected>Choose product...</option>
               <option>...</option>
             </select>
-
           </div>
         </div>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
       </form>
+
     </div>
 
     <!-- deleteModal -->

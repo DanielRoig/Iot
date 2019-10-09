@@ -40,7 +40,11 @@ myDB.transaction(function (tran) {
 			var element = document.createElement("option");
 			element.innerHTML = data.rows[i].Name;
 			element.value = data.rows[i].Name;
-			document.getElementById("createDropdown").appendChild(element);
+
+			document.getElementById("createDropdown").appendChild(element.cloneNode(true));
+			document.getElementById("readDropdown").appendChild(element.cloneNode(true));
+			document.getElementById("deleteDropdown").appendChild(element.cloneNode(true));
+
 		}
 	});
 });
@@ -49,11 +53,30 @@ var createButton = document.getElementById("createButton");
 createButton.addEventListener("click", function () {
 	var valueDropdown = document.getElementById("createDropdown");
 	var product = document.getElementById("createInput").value;
+	if (product != "") {
+		myDB.transaction(function (tran) {
+			tran.executeSql("SELECT ID FROM Brands WHERE Name='" + valueDropdown.options[valueDropdown.selectedIndex].value + "'", [], function (tran, data) {
+				tran.executeSql('insert into Products (Name, BrandID) values ("' + product + '", ' + data.rows[0].ID + ')');
+			});
 
-	myDB.transaction(function (tran) {
-		tran.executeSql("SELECT ID FROM Brands WHERE Name='"+valueDropdown.options[valueDropdown.selectedIndex].value+"'", [], function (tran, data) {
-			tran.executeSql('insert into Products (Name, BrandID) values ("' + product + '", ' + data.rows[0].ID + ')');
 		});
+		document.getElementById("createInput").value = "";
+	}
+});
 
+var readButton = document.getElementById("readButton");
+readButton.addEventListener("click", function () {
+	var valueDropdown = document.getElementById("readDropdown");
+	myDB.transaction(function (tran) {
+		tran.executeSql("SELECT ID FROM Brands WHERE Name='" + valueDropdown.options[valueDropdown.selectedIndex].value + "'", [], function (tran, data) {
+			tran.executeSql('SELECT Name FROM Products WHERE PRODUCTS.BrandID=' + data.rows[0].ID, [], function (tran, data) {
+				for (i = 0; i < data.rows.length; i++) {
+					var element = document.createElement("div");
+					element.innerHTML = data.rows[i].Name;
+					element.value = data.rows[i].Name;
+					document.getElementById("textBox").appendChild(element);
+				}
+			});
+		});
 	});
 });
