@@ -49,16 +49,15 @@
         <div class="form-row">
           <div class="form-group col-md-3">
             <label>Create</label>
-            <input type="text" class="form-control mb-2" placeholder="Product">
+            <input id="createInput" type="text" class="form-control mb-2" placeholder="Product">
 
-            <select class="form-control">
-              <option selected>Choose brand...</option>
-              <option>...</option>
+            <select id="createDropdown" class="form-control">
+              <option value="" disabled selected>Choose brand...</option>
             </select>
 
           </div>
         </div>
-        <button type="submit" class="btn btn-success">Create</button>
+        <button id="createButton" type="button" class="btn btn-success">Create</button>
       </form>
 
       <form class="mb-4">
