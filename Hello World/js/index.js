@@ -67,6 +67,11 @@ createButton.addEventListener("click", function () {
 var readButton = document.getElementById("readButton");
 readButton.addEventListener("click", function () {
 	var valueDropdown = document.getElementById("readDropdown");
+	var textBox = document.getElementById("textBox")
+	while (textBox.hasChildNodes()) {
+		textBox.removeChild(textBox.lastChild);
+	}
+
 	myDB.transaction(function (tran) {
 		tran.executeSql("SELECT ID FROM Brands WHERE Name='" + valueDropdown.options[valueDropdown.selectedIndex].value + "'", [], function (tran, data) {
 			tran.executeSql('SELECT Name FROM Products WHERE PRODUCTS.BrandID=' + data.rows[0].ID, [], function (tran, data) {
@@ -74,7 +79,7 @@ readButton.addEventListener("click", function () {
 					var element = document.createElement("div");
 					element.innerHTML = data.rows[i].Name;
 					element.value = data.rows[i].Name;
-					document.getElementById("textBox").appendChild(element);
+					textBox.appendChild(element);
 				}
 			});
 		});
