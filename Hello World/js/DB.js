@@ -18,6 +18,9 @@ function createDB() {
 		tran.executeSql('insert into Brands (Name) values ("Samsung")');
 		
 		tran.executeSql('insert into Products (Name, BrandID) values ("iPhone", 1)');
+		tran.executeSql('insert into Products (Name, BrandID) values ("iPad", 1)');
 		tran.executeSql('insert into Products (Name, BrandID) values ("Galaxy S10", 2)');
+		tran.executeSql('insert into Products (Name, BrandID) values ("Galaxy Fold", 2)');
+
 	});
 }

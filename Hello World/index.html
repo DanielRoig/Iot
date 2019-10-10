@@ -75,12 +75,11 @@
         <div class="form-row">
           <div class="form-group col-md-3">
             <label>Delete product</label>
-            <select id="deleteDropdown" class="form-control">
+            <select id="deleteDropdownBrands" class="form-control mb-2">
               <option value="" disabled selected>Choose brand...</option>
             </select>
-            <select class="form-control">
-              <option selected>Choose product...</option>
-              <option>...</option>
+            <select id="deleteDropdownProducts" class="form-control mb-2">
+              <option value="" disabled selected>Choose brand...</option>
             </select>
           </div>
         </div>
@@ -101,11 +100,11 @@
             </button>
           </div>
           <div class="modal-body">
-            ...
+            Estas seguro de que quieres eliminar este producto?
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button id="deleteButton" type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
           </div>
         </div>
       </div>
