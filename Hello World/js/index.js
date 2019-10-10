@@ -46,9 +46,10 @@ readButton.addEventListener("click", function () {
 		tran.executeSql("SELECT ID FROM Brands WHERE Name='" + valueDropdown.options[valueDropdown.selectedIndex].value + "'", [], function (tran, data) {
 			tran.executeSql('SELECT Name FROM Products WHERE PRODUCTS.BrandID=' + data.rows[0].ID, [], function (tran, data) {
 				for (var i = 0; i < data.rows.length; i++) {
-					var element = document.createElement("div");
+					var element = document.createElement("li");
 					element.innerHTML = data.rows[i].Name;
 					element.value = data.rows[i].Name;
+					element.className= "list-group-item";
 					textBox.appendChild(element);
 				}
 			});
