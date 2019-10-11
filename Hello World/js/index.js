@@ -52,9 +52,8 @@ createButtonBrand.addEventListener("click", function () {
 	}
 });
 
-var readButton = document.getElementById("readButton");
-readButton.addEventListener("click", function () {
-	var valueDropdown = document.getElementById("readDropdown");
+var readDropdown = document.getElementById("readDropdown")
+readDropdown.addEventListener('change', (event) => {
 	var textBox = document.getElementById("textBox")
 
 	while (textBox.hasChildNodes()) {
@@ -62,7 +61,7 @@ readButton.addEventListener("click", function () {
 	}
 
 	myDB.transaction(function (tran) {
-		tran.executeSql("SELECT ID FROM Brands WHERE Name='" + valueDropdown.options[valueDropdown.selectedIndex].value + "'", [], function (tran, data) {
+		tran.executeSql("SELECT ID FROM Brands WHERE Name='" + readDropdown.options[readDropdown.selectedIndex].value + "'", [], function (tran, data) {
 			tran.executeSql('SELECT Name FROM Products WHERE PRODUCTS.BrandID=' + data.rows[0].ID, [], function (tran, data) {
 				for (var i = 0; i < data.rows.length; i++) {
 					var element = document.createElement("li");
@@ -109,6 +108,7 @@ deleteButton.addEventListener("click", function () {
 	myDB.transaction(function (tran) {
 		tran.executeSql("DELETE FROM Products WHERE Name = '" + deleteDropdownProducts.options[deleteDropdownProducts.selectedIndex].value + "'", [], function (tran, data) {
 			deleteDropdownProducts.removeChild(deleteDropdownProducts.options[deleteDropdownProducts.selectedIndex]);
+			
 		});
 	});
 });
