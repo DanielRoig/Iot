@@ -33,11 +33,23 @@ createButton.addEventListener("click", function () {
 	}
 });
 
+var createButtonBrand = document.getElementById("createButtonBrand");
+createButtonBrand.addEventListener("click", function () {
+	var brand = document.getElementById("createInputBrand").value;
+	if (brand != "") {
+		myDB.transaction(function (tran) {
+			alert(brand);
+			tran.executeSql('insert into Brands (Name) values ("' + brand + '")');
+		});
+		document.getElementById("createInputBrand").value = "";
+	}
+});
+
 var readButton = document.getElementById("readButton");
 readButton.addEventListener("click", function () {
 	var valueDropdown = document.getElementById("readDropdown");
 	var textBox = document.getElementById("textBox")
-	
+
 	while (textBox.hasChildNodes()) {
 		textBox.removeChild(textBox.lastChild);
 	}
@@ -49,7 +61,7 @@ readButton.addEventListener("click", function () {
 					var element = document.createElement("li");
 					element.innerHTML = data.rows[i].Name;
 					element.value = data.rows[i].Name;
-					element.className= "list-group-item";
+					element.className = "list-group-item";
 					textBox.appendChild(element);
 				}
 			});
