@@ -38,7 +38,6 @@ createButtonBrand.addEventListener("click", function () {
 	var brand = document.getElementById("createInputBrand").value;
 	if (brand != "") {
 		myDB.transaction(function (tran) {
-			alert(brand);
 			tran.executeSql('insert into Brands (Name) values ("' + brand + '")');
 
 			var element = document.createElement("option");
