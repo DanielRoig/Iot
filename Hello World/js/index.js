@@ -40,6 +40,14 @@ createButtonBrand.addEventListener("click", function () {
 		myDB.transaction(function (tran) {
 			alert(brand);
 			tran.executeSql('insert into Brands (Name) values ("' + brand + '")');
+
+			var element = document.createElement("option");
+			element.innerHTML = brand;
+			element.value = brand;
+
+			document.getElementById("createDropdown").appendChild(element.cloneNode(true));
+			document.getElementById("readDropdown").appendChild(element.cloneNode(true));
+			document.getElementById("deleteDropdownBrands").appendChild(element.cloneNode(true));
 		});
 		document.getElementById("createInputBrand").value = "";
 	}
