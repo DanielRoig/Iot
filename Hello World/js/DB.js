@@ -5,9 +5,9 @@ function createDB() {
 	if (!myDB) {
 		alert('La BBDD no se ha creado correctamente');
 	}
-
+	
 	myDB.transaction(function (tran) {
-
+	
 		tran.executeSql('DROP TABLE Products');
 		tran.executeSql('DROP TABLE Brands');
 
