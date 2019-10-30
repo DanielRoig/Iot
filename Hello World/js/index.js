@@ -119,16 +119,16 @@ deleteButton.addEventListener("click", function () {
 //epc[0]=inventory.getElementsByTagName("epc")[0].childNodes[0].nodeValue;
 
 var x = new XMLHttpRequest();
-x.open("GET", "http://localhost:3161/devices/simulator/inventory", true);
-x.onReadystatechange = function () {
+x.open("GET", "http://localhost:3161/devices/simulator/inventory/", true);
+x.onreadystatechange = function () {
   if (x.readyState == 4 && x.status == 200)
   {
     var doc = x.responseXML;
-    console.log(doc);
-	// …
-	parser = new DOMParser();
-	xmlDoc = parser.parseFromString(doc,"text/xml");
-	var epc = xmlDoc.getElementsByTagName("epc")[0].childNodes[0].nodeValue;
+	console.log(doc);
+	var AdvanNetId = doc.getElementsByTagName("advanNetId")[0].firstChild.nodeValue;
+	console.log(AdvanNetId);
+	// We read the FIRST epc
+	var epc = doc.getElementsByTagName("epc")[0].firstChild.nodeValue;
 	console.log(epc);
   }
 };
