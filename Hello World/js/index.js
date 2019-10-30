@@ -112,3 +112,17 @@ deleteButton.addEventListener("click", function () {
 		});
 	});
 });
+
+
+
+
+var x = new XMLHttpRequest();
+x.open("GET", "http://localhost:3161/devices/simulator", true);
+x.onreadystatechange = function () {
+  if (x.readyState == 4 && x.status == 200)
+  {
+    var doc = x.responseXML;
+    console.log(doc);
+  }
+};
+x.send(null);
