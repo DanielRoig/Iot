@@ -112,3 +112,29 @@ deleteButton.addEventListener("click", function () {
 		});
 	});
 });
+
+//var inventory= window.open("GET",'file:////Users/jordi/unirepos/Iot/Hello World/inventory.xml',false);
+//var epc = [];
+
+//epc[0]=inventory.getElementsByTagName("epc")[0].childNodes[0].nodeValue;
+
+var x = new XMLHttpRequest();
+x.open("GET", "http://localhost:3161/devices/simulator/inventory", true);
+x.onReadystatechange = function () {
+  if (x.readyState == 4 && x.status == 200)
+  {
+    var doc = x.responseXML;
+    console.log(doc);
+	// …
+	parser = new DOMParser();
+	xmlDoc = parser.parseFromString(doc,"text/xml");
+	var epc = xmlDoc.getElementsByTagName("epc")[0].childNodes[0].nodeValue;
+	console.log(epc);
+  }
+};
+x.send(null);
+
+//var epc = invent.getElementsByTagName("epc")[0].getElementsByTagName("epc")[0].firstChild.nodeValue;
+
+// open -n -a /Applications/Google\ Chrome.app --args --user-data-dir="/Users/jordi/unirepos/Iot/IoT-simulator-2.3.18_02" --disable-web-security
+// $ open -a Google\ Chrome --args --disable-web-security --/Users/jordi/unirepos/Iot/Chrome_test
