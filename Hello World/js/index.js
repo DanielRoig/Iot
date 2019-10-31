@@ -113,12 +113,7 @@ deleteButton.addEventListener("click", function () {
 	});
 });
 
-
-//var inventory= window.open("GET",'file:////Users/jordi/unirepos/Iot/Hello World/inventory.xml',false);
-//var epc = [];
-
-//epc[0]=inventory.getElementsByTagName("epc")[0].childNodes[0].nodeValue;
-
+var epc = []
 var x = new XMLHttpRequest();
 x.open("GET", "http://localhost:3161/devices/simulator/inventory/", true);
 x.onreadystatechange = function () {
@@ -126,16 +121,20 @@ x.onreadystatechange = function () {
   {
     var doc = x.responseXML;
 	  console.log(doc);
-	  var AdvanNetId = doc.getElementsByTagName("advanNetId")[0].firstChild.nodeValue;
+      var size = doc.getElementsByTagName("size")[0].firstChild.nodeValue;
 	  console.log(AdvanNetId);
-	// We read the FIRST epc
-	  var epc = doc.getElementsByTagName("epc")[0].firstChild.nodeValue;
-	  console.log(epc);
+      var AdvanNetId = doc.getElementsByTagName("advanNetId")[0].firstChild.nodeValue;
+	  console.log(AdvanNetId);
+          
+      // We read the FIRST epc
+      for(var i=0; i < doc.getElementsByTagName("epc").length; i++){
+          epc.push(doc.getElementsByTagName("epc")[i].childNodes[0].nodeValue);
+      }
+      console.log(epc);
+    
   }
 };
 x.send(null);
-
-//var epc = invent.getElementsByTagName("epc")[0].getElementsByTagName("epc")[0].firstChild.nodeValue;
 
 // open -n -a /Applications/Google\ Chrome.app --args --user-data-dir="/Users/jordi/unirepos/Iot/IoT-simulator-2.3.18_02" --disable-web-security
 // $ open -a Google\ Chrome --args --disable-web-security --/Users/jordi/unirepos/Iot/Chrome_test

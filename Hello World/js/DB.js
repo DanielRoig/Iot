@@ -6,8 +6,8 @@ async function createDB() {
 
 
 
-		tran.executeSql('DROP TABLE Products', [], function (tran, results) {
-			tran.executeSql('DROP TABLE Brands', [], function (tran, results){
+		
+			
 				tran.executeSql('CREATE TABLE IF NOT EXISTS Products (ID INTEGER PRIMARY KEY, Name VARCHAR, BrandID INTEGER, FOREIGN KEY (BrandID) REFERENCES Brands(ID))'),
 		
 		tran.executeSql('CREATE TABLE IF NOT EXISTS Brands (ID INTEGER PRIMARY KEY, Name VARCHAR)'),
@@ -20,8 +20,6 @@ async function createDB() {
 		tran.executeSql('insert into Products (Name, BrandID) values ("Galaxy S10", 2)'),
 		tran.executeSql('insert into Products (Name, BrandID) values ("Galaxy Fold", 2)')
 
-			});
-
-		});
+		
 	});
 }
