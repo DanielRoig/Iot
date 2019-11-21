@@ -18,7 +18,7 @@ myDB.transaction(function (tran) {
 	});
 });
 
-var createButton = document.getElementById("createButton");
+/* var createButton = document.getElementById("createButton");
 createButton.addEventListener("click", function () {
 	var valueDropdown = document.getElementById("createDropdown");
 	var product = document.getElementById("createInput").value;
@@ -31,7 +31,7 @@ createButton.addEventListener("click", function () {
 		});
 		document.getElementById("createInput").value = "";
 	}
-});
+}); */
 
 var createButtonBrand = document.getElementById("createButtonBrand");
 createButtonBrand.addEventListener("click", function () {
@@ -135,6 +135,25 @@ x.onreadystatechange = function () {
   }
 };
 x.send(null);
+
+function getFolder(callback) {
+	var data = [];
+	myDB.transaction(function (tx) {
+	tx.executeSql('SELECT * FROM Products where',
+		function (tx, results) {
+			if (results.rows && results.rows.length) {
+				for (i = 0; i < results.rows.length; i++) {
+					data.push(results.rows.item(i));
+				}
+			}
+			if (typeof(callback) == 'function')
+				callback(data);
+		},
+		function (tx, error) {
+			console.log(error);
+		});
+	});
+	}
 
 // open -n -a /Applications/Google\ Chrome.app --args --user-data-dir="/Users/jordi/unirepos/Iot/IoT-simulator-2.3.18_02" --disable-web-security
 // $ open -a Google\ Chrome --args --disable-web-security --/Users/jordi/unirepos/Iot/Chrome_test

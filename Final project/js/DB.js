@@ -8,18 +8,18 @@ async function createDB() {
 
 		
 			
-				tran.executeSql('CREATE TABLE IF NOT EXISTS Products (ID INTEGER PRIMARY KEY, Name VARCHAR, BrandID INTEGER, FOREIGN KEY (BrandID) REFERENCES Brands(ID))'),
+		tran.executeSql('CREATE TABLE IF NOT EXISTS Cars (ID INTEGER PRIMARY KEY, Name VARCHAR, License VARCHAR, OrderID INTEGER, FOREIGN KEY (OrderID) REFERENCES Order(ID))'),
 		
-		tran.executeSql('CREATE TABLE IF NOT EXISTS Brands (ID INTEGER PRIMARY KEY, Name VARCHAR)'),
+		tran.executeSql('CREATE TABLE IF NOT EXISTS Orders (ID INTEGER PRIMARY KEY, Product VARCHAR, NumProd INTEGER, CarID INTEGER, FOREIGN KEY (CarID) REFERENCES CarID))');
 
-		tran.executeSql('insert into Brands (Name) values ("Apple")'),
+/* 		tran.executeSql('insert into Brands (Name) values ("Apple")'),
 		tran.executeSql('insert into Brands (Name) values ("Samsung")'),
 
 		tran.executeSql('insert into Products (Name, BrandID) values ("iPhone", 1)'),
 		tran.executeSql('insert into Products (Name, BrandID) values ("iPad", 1)'),
 		tran.executeSql('insert into Products (Name, BrandID) values ("Galaxy S10", 2)'),
 		tran.executeSql('insert into Products (Name, BrandID) values ("Galaxy Fold", 2)')
-
+ */
 		
-	});
+	})
 }

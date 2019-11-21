@@ -10,15 +10,15 @@ myDB.transaction(function (tran) {
 			element.innerHTML = data.rows[i].Name;
 			element.value = data.rows[i].Name;
 
-			document.getElementById("createDropdown").appendChild(element.cloneNode(true));
+/* 			document.getElementById("createDropdown").appendChild(element.cloneNode(true));
 			document.getElementById("readDropdown").appendChild(element.cloneNode(true));
 			document.getElementById("deleteDropdownBrands").appendChild(element.cloneNode(true));
-
+ */
 		}
 	});
 });
 
-var createButton = document.getElementById("createButton");
+/* var createButton = document.getElementById("createButton");
 createButton.addEventListener("click", function () {
 	var valueDropdown = document.getElementById("createDropdown");
 	var product = document.getElementById("createInput").value;
@@ -31,9 +31,9 @@ createButton.addEventListener("click", function () {
 		});
 		document.getElementById("createInput").value = "";
 	}
-});
+}); */
 
-var createButtonBrand = document.getElementById("createButtonBrand");
+/* var createButtonBrand = document.getElementById("createButtonBrand");
 createButtonBrand.addEventListener("click", function () {
 	var brand = document.getElementById("createInputBrand").value;
 	if (brand != "") {
@@ -50,9 +50,9 @@ createButtonBrand.addEventListener("click", function () {
 		});
 		document.getElementById("createInputBrand").value = "";
 	}
-});
+}); */
 
-var readDropdown = document.getElementById("readDropdown")
+/* var readDropdown = document.getElementById("readDropdown")
 readDropdown.addEventListener('change', (event) => {
 	var textBox = document.getElementById("textBox")
 
@@ -73,9 +73,9 @@ readDropdown.addEventListener('change', (event) => {
 			});
 		});
 	});
-});
+}); */
 
-
+/* 
 var deleteDropdown = document.getElementById("deleteDropdownBrands")
 deleteDropdown.addEventListener('change', (event) => {
 
@@ -99,9 +99,9 @@ deleteDropdown.addEventListener('change', (event) => {
 			});
 		});
 	});
-});
+}); */
 
-var deleteButton = document.getElementById("deleteButton");
+/* var deleteButton = document.getElementById("deleteButton");
 deleteButton.addEventListener("click", function () {
 
 	var deleteDropdownProducts = document.getElementById("deleteDropdownProducts");
@@ -111,7 +111,7 @@ deleteButton.addEventListener("click", function () {
 			
 		});
 	});
-});
+}); */
 
 var epc = []
 var x = new XMLHttpRequest();
@@ -122,19 +122,29 @@ x.onreadystatechange = function () {
     var doc = x.responseXML;
 	  console.log(doc);
       var size = doc.getElementsByTagName("size")[0].firstChild.nodeValue;
-	  console.log(AdvanNetId);
+	  console.log(size);
       var AdvanNetId = doc.getElementsByTagName("advanNetId")[0].firstChild.nodeValue;
 	  console.log(AdvanNetId);
           
-      // We read the FIRST epc
+      // We read all the epcs
       for(var i=0; i < doc.getElementsByTagName("epc").length; i++){
-          epc.push(doc.getElementsByTagName("epc")[i].childNodes[0].nodeValue);
+		  epc.push(doc.getElementsByTagName("epc")[i].childNodes[0].nodeValue);
       }
-      console.log(epc);
-    
+	  console.log(epc);
   }
 };
-x.send(null);
+
+x.send(epc);
+
+myDB.transaction (function (tran,id){
+	var trx = "";
+	id=epc;
+	tran.executeSql('insert into Cars (ID, Name, License, OrderID ) values (?, "Toyota", "477663 RTT", ?)',[id[0], id[1]])
+	trx= tran.executeSql('select * from Cars');
+	console.log(trx);
+});
+
+
 
 // open -n -a /Applications/Google\ Chrome.app --args --user-data-dir="/Users/jordi/unirepos/Iot/IoT-simulator-2.3.18_02" --disable-web-security
 // $ open -a Google\ Chrome --args --disable-web-security --/Users/jordi/unirepos/Iot/Chrome_test
