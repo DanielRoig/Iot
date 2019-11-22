@@ -3,94 +3,27 @@ var myDB;
 createDB();
 
 
-myDB.transaction(function (tran) {
-	tran.executeSql('SELECT * FROM Brands', [], function (tran, data) {
-		for (var i = 0; i < data.rows.length; i++) {
-			var element = document.createElement("option");
-			element.innerHTML = data.rows[i].Name;
-			element.value = data.rows[i].Name;
+function createPost(id) {
 
-			/* 			document.getElementById("createDropdown").appendChild(element.cloneNode(true));
-						document.getElementById("readDropdown").appendChild(element.cloneNode(true));
-						document.getElementById("deleteDropdownBrands").appendChild(element.cloneNode(true));
-			 */
-		}
+	var data1;
+	var data2;
+
+	myDB.transaction(function (tran) {
+		tran.executeSql(`SELECT * FROM Cars WHERE ID=${id}`, [], function (tran, data) {
+			for (var i = 0; i < data.rows.length; i++) {
+				data1 = data.rows[i];
+			}
+
+			tran.executeSql(`SELECT * FROM Products WHERE CarID=${id}`, [], function (tran, data) {
+				createNewLabel(data1.CarName, data1.LicenseNumber, data1.DriverName, data1.DescriptionOrder, data);
+			});
+		});
 	});
-});
-
-
-function createNewLabel(nameBrand, plate, nameDriver) {
-	var element = document.createElement("a");
-	element.className = "list-group-item list-group-item-action";
-	element.id = "list-home-list";
-	element.href = `#${nameDriver}${nameBrand}`;
-
-	element.setAttribute("data-toggle", "list");
-	element.setAttribute("role", "tab");
-	element.setAttribute("aria-controls", "home");
-
-	element.innerHTML = `Car: <b>${nameBrand}</b> License plate: <b>${plate}</b>`;
-
-	document.getElementById("list-tab").appendChild(element);
-	createNewDetail(nameBrand, plate, nameDriver)
 }
 
+createPost(1);
+createPost(2);
 
-
-
-function createNewDetail(nameBrand, plate, nameDriver) {
-	var element = document.createElement("a");
-	element.className = "tab-pane fade";
-	element.id = `${nameDriver}${nameBrand}`;
-
-	element.setAttribute("role", "tabpanel");
-	element.setAttribute("aaria-labelledby", "list-messages-list");
-
-	element.innerHTML = `<div class="card active">
-	<div class="card-body">
-	  <h5 class="card-title">${nameBrand} ${plate}</h5>
-	  <ul class="list-group">
-		<li class="list-group-item d-flex justify-content-between align-items-center">
-		  CocaCola
-		  <span class="badge badge-primary badge-pill">1</span>
-		</li>
-		<li class="list-group-item d-flex justify-content-between align-items-center">
-		  Spaghetti
-		  <span class="badge badge-primary badge-pill">2</span>
-		</li>
-		<li class="list-group-item d-flex justify-content-between align-items-center">
-		  Meat
-		  <span class="badge badge-primary badge-pill">1</span>
-		</li>
-	  </ul>
-
-	  <dl class="row mt-3">
-		<dt class="col-sm-3">Description</dt>
-		<dd class="col-sm-9">A description list is perfect for defining terms.</dd>
-
-		<dt class="col-sm-3">Euismod</dt>
-		<dd class="col-sm-9">
-		  <p>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</p>
-		  <p>Donec id elit non mi porta gravida at eget metus.</p>
-		</dd>
-
-		<dt class="col-sm-3">Malesuada </dt>
-		<dd class="col-sm-9">Etiam porta sem malesuada magna mollis euismod.</dd>
-	  </dl>
-
-	  <div class="text-right mt-3">
-		<button class="btn btn-outline-danger">Delete order</button>
-		<button class="btn btn-success">Done</button>
-	  </div>
-	</div>
-  </div>`;
-
-	document.getElementById("nav-tabContent").appendChild(element);
-}
-
-createNewLabel("opel", 4362346, "juan");
-createNewLabel("citroen", 54654694, "marc");
-createNewLabel("ferrari", 654746, "david");
 
 
 
