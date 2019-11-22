@@ -18,14 +18,12 @@ function createNewLabel(CarName, LicenseNumber, DriverName, Description, Product
         <span class="badge badge-primary badge-pill">${ProductsObject.rows[i].NumProd}</span>
       </li>`
     }
-console.log(listElements)
 
     createNewDetail(CarName, LicenseNumber, DriverName, Description, listElements)
 }
 
 
 function createNewDetail(CarName, LicenseNumber, DriverName, Description, ProductArray) {
-    console.log(ProductArray)
     var element = document.createElement("a");
     element.className = "tab-pane fade";
     element.id = `${DriverName}${CarName}`;
@@ -49,8 +47,8 @@ function createNewDetail(CarName, LicenseNumber, DriverName, Description, Produc
 	  </dl>
 
 	  <div class="text-right mt-3">
-		<button class="btn btn-outline-danger">Delete order</button>
-		<button class="btn btn-success">Done</button>
+		<button class="btn btn-outline-danger" id="${DriverName}${CarName}DeleteButton">Delete order</button>
+		<button class="btn btn-success" id="${DriverName}${CarName}DoneButton">Done</button>
 	  </div>
 	</div>
   </div>`;

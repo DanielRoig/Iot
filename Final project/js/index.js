@@ -6,7 +6,6 @@ createDB();
 function createPost(id) {
 
 	var data1;
-	var data2;
 
 	myDB.transaction(function (tran) {
 		tran.executeSql(`SELECT * FROM Cars WHERE ID=${id}`, [], function (tran, data) {
@@ -23,6 +22,8 @@ function createPost(id) {
 
 createPost(1);
 createPost(2);
+createPost(3);
+createPost(4);
 
 
 
