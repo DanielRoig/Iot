@@ -31,8 +31,8 @@ async function createDB() {
 		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Orange juice", 5, 3)');
 		
 		//CAR 4
-		tran.executeSql('insert into Cars (CarName, LicenseNumber, DriverName, DescriptionOrder) values ("Volkswagen", "4456 PHT", "Markus", " ")');
-		//PRODUCTS:
+		tran.executeSql('insert into Cars (CarName, LicenseNumber, DriverName, DescriptionOrder) values ("Volkswagen", "4456 PHT", "Markus", " No green bananas please, I like my bananas ripe ")');
+		//PRODUCTS:   
 		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Eggs", 1, 4)');
 		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Corn Flakes", 1, 4)');
 		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Bananas", 4, 4)');

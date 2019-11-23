@@ -22,6 +22,21 @@ function createNewLabel(CarName, LicenseNumber, DriverName, Description, Product
     createNewDetail(CarName, LicenseNumber, DriverName, Description, listElements)
 }
 
+function popUpDone(){
+    alert("An E-mail will be send to the customer: Thanks a lot for shopping with SMARTKET, we hope you had a pleasant experience.");
+    
+}
+
+function popUpDelete() {
+     alert("An E-mail will be send to the customer: We are sorry to inform you that we could not complete your order and therefore have to reject it. Not sufficient coca-cola in stock. We are sorry for the inconvenience. SMARTKET");
+    
+}
+
+function deleteElement(){
+    
+}
+
+
 
 function createNewDetail(CarName, LicenseNumber, DriverName, Description, ProductArray) {
     var element = document.createElement("a");
@@ -47,8 +62,9 @@ function createNewDetail(CarName, LicenseNumber, DriverName, Description, Produc
 	  </dl>
 
 	  <div class="text-right mt-3">
-		<button class="btn btn-outline-danger" id="${DriverName}${CarName}DeleteButton">Delete order</button>
-		<button class="btn btn-success" id="${DriverName}${CarName}DoneButton">Done</button>
+		<button onclick="popUpDelete()" class="btn btn-outline-danger" id="${DriverName}${CarName}DeleteButton">Delete order</button>
+		<button onclick="popUpDone()" class="btn btn-success" id="${DriverName}${CarName}DoneButton">Done</button>
+
 	  </div>
 	</div>
   </div>`;
