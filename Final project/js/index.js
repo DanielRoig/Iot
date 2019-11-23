@@ -28,36 +28,41 @@ createPost(4);
 
 
 
-
-var epc = []
-var x = new XMLHttpRequest();
-x.open("GET", "http://localhost:3161/devices/simulator/inventory/", true);
-x.onreadystatechange = function () {
-	if (x.readyState == 4 && x.status == 200) {
-		var doc = x.responseXML;
-		console.log(doc);
-		var size = doc.getElementsByTagName("size")[0].firstChild.nodeValue;
-		console.log(size);
-		var AdvanNetId = doc.getElementsByTagName("advanNetId")[0].firstChild.nodeValue;
-		console.log(AdvanNetId);
-
-		// We read all the epcs
-		for (var i = 0; i < doc.getElementsByTagName("epc").length; i++) {
-			epc.push(doc.getElementsByTagName("epc")[i].childNodes[0].nodeValue);
+const interval = setInterval (function(){
+	var epc = []
+	var id = []
+	var x = new XMLHttpRequest();
+	x.open("GET", "http://localhost:3161/devices/simulator/inventory/", true);
+	x.onreadystatechange = function () {
+		if (x.readyState == 4 && x.status == 200) {
+			var doc = x.responseXML;
+			console.log(doc);
+			// var size = doc.getElementsByTagName("size")[0].firstChild.nodeValue;
+			// console.log(size);
+			var AdvanNetId = doc.getElementsByTagName("advanNetId")[0].firstChild.nodeValue;
+			console.log(AdvanNetId);
+	
+			// We read all the epcs
+			for (var i = 0; i < doc.getElementsByTagName("epc").length; i++) {
+				epc.push(doc.getElementsByTagName("epc")[i].childNodes[0].nodeValue);
+			}
+			console.log(parseInt(epc));
+			epc=parseInt(epc);
 		}
-		console.log(epc);
-	}
-};
+	};
+	x.send(epc);
+	createPost(epc[0]);
+},500);
 
-x.send(epc);
 
-myDB.transaction(function (tran, id) {
-	var trx = "";
-	id = epc;
-	tran.executeSql('insert into Cars (ID, Name, License, OrderID ) values (?, "Toyota", "477663 RTT", ?)', [id[0], id[1]])
-	trx = tran.executeSql('select * from Cars');
-	console.log(trx);
-});
+
+// myDB.transaction(function (tran, id) {
+// 	var trx = "";
+// 	id = epc;
+// 	tran.executeSql('insert into Cars (ID, Name, License, OrderID ) values (?, "Toyota", "477663 RTT", ?)', [id[0], id[1]])
+// 	trx = tran.executeSql('select * from Cars');
+// 	console.log(trx);
+// });
 
 
 
