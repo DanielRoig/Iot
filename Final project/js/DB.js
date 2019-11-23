@@ -3,7 +3,11 @@ async function createDB() {
 	myDB = openDatabase('myDDBB', '1.0', 'This is a client side database', 2 * 1024 * 1024);
 
 	myDB.transaction(async tran => {
-		
+
+
+		tran.executeSql('DROP TABLE IF EXISTS Cars'),
+		tran.executeSql('DROP TABLE IF EXISTS Products'),
+
 		tran.executeSql('CREATE TABLE IF NOT EXISTS Cars (ID INTEGER PRIMARY KEY, CarName VARCHAR, LicenseNumber VARCHAR, DriverName VARCHAR, DescriptionOrder VARCHAR)'),
 		
 		tran.executeSql('CREATE TABLE IF NOT EXISTS Products (ProductName VARCHAR, NumProd INTEGER, CarID INTEGER, FOREIGN KEY (CarID) REFERENCES Cars(ID))');
@@ -31,8 +35,8 @@ async function createDB() {
 		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Orange juice", 5, 3)');
 		
 		//CAR 4
-		tran.executeSql('insert into Cars (CarName, LicenseNumber, DriverName, DescriptionOrder) values ("Volkswagen", "4456 PHT", "Markus", " No green bananas please, I like my bananas ripe ")');
-		//PRODUCTS:   
+		tran.executeSql('insert into Cars (CarName, LicenseNumber, DriverName, DescriptionOrder) values ("Volkswagen", "4456 PHT", "Markus", " ")');
+		//PRODUCTS:
 		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Eggs", 1, 4)');
 		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Corn Flakes", 1, 4)');
 		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Bananas", 4, 4)');
