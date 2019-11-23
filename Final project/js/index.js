@@ -15,7 +15,7 @@ function createPost(id) {
 
 				tran.executeSql(`SELECT * FROM Products WHERE CarID=${id}`, [], function (tran, data) {
 					//drivername carname
-					if (!document.getElementById(`${data1.DriverName}${data1.CarName}`)) {
+					if (!document.getElementById(`${data1.DriverName}${data1.CarName}Label`)) {
 						createNewLabel(data1.CarName, data1.LicenseNumber, data1.DriverName, data1.DescriptionOrder, data);
 					}
 				});

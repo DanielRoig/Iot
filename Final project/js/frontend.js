@@ -1,8 +1,8 @@
 function createNewLabel(CarName, LicenseNumber, DriverName, Description, ProductsObject) {
     var element = document.createElement("a");
     element.className = "list-group-item list-group-item-action";
-    element.id = "list-home-list";
-    element.href = `#${DriverName}${CarName}`;
+    element.id = `${DriverName}${CarName}Label`;
+    element.href = `#${DriverName}${CarName}Detail`;
 
     element.setAttribute("data-toggle", "list");
     element.setAttribute("role", "tab");
@@ -27,7 +27,7 @@ function createNewLabel(CarName, LicenseNumber, DriverName, Description, Product
 function createNewDetail(CarName, LicenseNumber, DriverName, Description, ProductArray) {
     var element = document.createElement("a");
     element.className = "tab-pane fade";
-    element.id = `${DriverName}${CarName}`;
+    element.id = `${DriverName}${CarName}Detail`;
 
     element.setAttribute("role", "tabpanel");
     element.setAttribute("aaria-labelledby", "list-messages-list");
@@ -48,12 +48,32 @@ function createNewDetail(CarName, LicenseNumber, DriverName, Description, Produc
 	  </dl>
 
 	  <div class="text-right mt-3">
-		<button class="btn btn-outline-danger" id="${DriverName}${CarName}DeleteButton">Delete order</button>
-		<button class="btn btn-success" id="${DriverName}${CarName}DoneButton">Done</button>
+		<button class="btn btn-outline-danger" id="${DriverName}${CarName}DeleteButton" value="${DriverName}">Delete order</button>
+		<button class="btn btn-success" id="${DriverName}${CarName}DoneButton" value="${DriverName}">Done</button>
 
 	  </div>
 	</div>
   </div>`;
 
     document.getElementById("nav-tabContent").appendChild(element);
+
+    var deleteButton = document.getElementById(`${DriverName}${CarName}DeleteButton`);
+    deleteButton.addEventListener("click", (event) => {
+      deleteModal(event.target.value)
+    });
+
+    var doneButton = document.getElementById(`${DriverName}${CarName}DoneButton`);
+    doneButton.addEventListener("click", (event) => {
+      doneModal(event.target.value)
+    });
+
 }
+
+function deleteModal(DriverName){
+  console.log(DriverName)
+}
+
+function doneModal(DriverName){
+  console.log(DriverName)
+}
+
