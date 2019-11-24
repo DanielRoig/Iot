@@ -78,9 +78,9 @@ function createNewDetail(CarName, LicenseNumber, DriverName, Description, Produc
 
     $(e.currentTarget).find('div[class="modal-body"]').text(drivername);
 
-    $(e.currentTarget).find('button[class="btn btn-success delete"]').attr("data-id", dataID);
+    $(e.currentTarget).find('button[class="btn btn-danger delete"]').attr("data-id", dataID);
 
-    $(e.currentTarget).find('button[class="btn btn-success delete"]').val(drivername);
+    $(e.currentTarget).find('button[class="btn btn-danger delete"]').val(drivername);
 
   });
 
