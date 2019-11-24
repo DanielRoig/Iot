@@ -48,8 +48,8 @@ function createNewDetail(CarName, LicenseNumber, DriverName, Description, Produc
 	  </dl>
 
 	  <div class="text-right mt-3">
-		<button class="btn btn-outline-danger" id="${DriverName}${CarName}DeleteButton" value="${DriverName}">Delete order</button>
-		<button class="btn btn-success" id="${DriverName}${CarName}DoneButton" data-drivername="${DriverName}" data-toggle="modal" data-target="#doneModal">Done</button>
+		<button class="btn btn-outline-danger" id="${DriverName}${CarName}DeleteButton" data-drivername="${DriverName}" data-id="${DriverName}${CarName}" data-toggle="modal" data-target="#deleteModal">Delete order</button>
+		<button class="btn btn-success" id="${DriverName}${CarName}DoneButton" data-drivername="${DriverName}" data-id="${DriverName}${CarName}" data-toggle="modal" data-target="#doneModal">Done</button>
 
 	  </div>
 	</div>
@@ -61,14 +61,31 @@ function createNewDetail(CarName, LicenseNumber, DriverName, Description, Produc
   $('#doneModal').on('show.bs.modal', function (e) {
 
     var drivername = $(e.relatedTarget).data('drivername');
+    var dataID = $(e.relatedTarget).data('id');
 
     $(e.currentTarget).find('div[class="modal-body"]').text(drivername);
 
-    $(e.currentTarget).find('button[class="btn btn-success done"]').attr('data-id', `${DriverName}${CarName}`);
+    $(e.currentTarget).find('button[class="btn btn-success done"]').attr("data-id", dataID);
 
     $(e.currentTarget).find('button[class="btn btn-success done"]').val(drivername);
 
   });
+
+  $('#deleteModal').on('show.bs.modal', function (e) {
+
+    var drivername = $(e.relatedTarget).data('drivername');
+    var dataID = $(e.relatedTarget).data('id');
+
+    $(e.currentTarget).find('div[class="modal-body"]').text(drivername);
+
+    $(e.currentTarget).find('button[class="btn btn-success delete"]').attr("data-id", dataID);
+
+    $(e.currentTarget).find('button[class="btn btn-success delete"]').val(drivername);
+
+  });
+
+
+
 }
 
 function deleteFromDB(name, dataId) {
@@ -80,27 +97,30 @@ function deleteFromDB(name, dataId) {
       }
       tran.executeSql(`DELETE FROM Cars WHERE DriverName="${name}"`, [], function (tran, data) {
         tran.executeSql(`DELETE FROM Products WHERE CarID=${id}`, [], function (tran, data) {
-          //deleteFromFrontEnd(dataId)
+          deleteFromFrontEnd(dataId)
         });
       });
     });
   });
 }
 
-// function deleteFromFrontEnd(dataId) {
-//   console.log(`${dataId}Label`)
-//   var element1 = document.getElementById(`${dataId}Label`);
-//   console.log(element1)
-//   element1.parentNode.removeChild(element1)
+function deleteFromFrontEnd(dataId) {
+  var element1 = document.getElementById(`${dataId}Label`);
+  element1.parentNode.removeChild(element1)
 
-//   var element2 = document.getElementById(`${dataId}Detail`);
-//   element2.parentNode.removeChild(element2)
-
-// }
+  var element2 = document.getElementById(`${dataId}Detail`);
+  element2.parentNode.removeChild(element2)
+}
 
 
 $('.done').on('click', function (e) {
   var drivername = e.currentTarget.value;
-  var dataId = $(event.currentTarget).attr('data-id');
+  var dataId = e.currentTarget.getAttribute("data-id")
+  deleteFromDB(drivername, dataId)
+});
+
+$('.delete').on('click', function (e) {
+  var drivername = e.currentTarget.value;
+  var dataId = e.currentTarget.getAttribute("data-id")
   deleteFromDB(drivername, dataId)
 });
