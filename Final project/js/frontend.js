@@ -61,25 +61,46 @@ function createNewDetail(CarName, LicenseNumber, DriverName, Description, Produc
   $('#doneModal').on('show.bs.modal', function (e) {
 
     var drivername = $(e.relatedTarget).data('drivername');
- 
+
     $(e.currentTarget).find('div[class="modal-body"]').text(drivername);
+
+    $(e.currentTarget).find('button[class="btn btn-success done"]').attr('data-id', `${DriverName}${CarName}`);
 
     $(e.currentTarget).find('button[class="btn btn-success done"]').val(drivername);
 
   });
 }
 
-function deleteFromDB(name){
-
+function deleteFromDB(name, dataId) {
+  var id;
+  myDB.transaction(function (tran) {
+    tran.executeSql(`SELECT ID FROM Cars WHERE DriverName="${name}"`, [], function (tran, data) {
+      for (var i = 0; i < data.rows.length; i++) {
+        id = data.rows[i].ID;
+      }
+      tran.executeSql(`DELETE FROM Cars WHERE DriverName="${name}"`, [], function (tran, data) {
+        tran.executeSql(`DELETE FROM Products WHERE CarID=${id}`, [], function (tran, data) {
+          //deleteFromFrontEnd(dataId)
+        });
+      });
+    });
+  });
 }
 
-function deleteFromFrontEnd(){
+// function deleteFromFrontEnd(dataId) {
+//   console.log(`${dataId}Label`)
+//   var element1 = document.getElementById(`${dataId}Label`);
+//   console.log(element1)
+//   element1.parentNode.removeChild(element1)
 
-}
+//   var element2 = document.getElementById(`${dataId}Detail`);
+//   element2.parentNode.removeChild(element2)
+
+// }
+
 
 $('.done').on('click', function (e) {
-
   var drivername = e.currentTarget.value;
-
-
+  var dataId = $(event.currentTarget).attr('data-id');
+  deleteFromDB(drivername, dataId)
 });

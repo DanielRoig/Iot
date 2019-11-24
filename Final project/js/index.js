@@ -9,16 +9,20 @@ function createPost(id) {
 		var data1;
 		myDB.transaction(function (tran) {
 			tran.executeSql(`SELECT * FROM Cars WHERE ID=${id}`, [], function (tran, data) {
-				for (var i = 0; i < data.rows.length; i++) {
-					data1 = data.rows[i];
-				}
-
-				tran.executeSql(`SELECT * FROM Products WHERE CarID=${id}`, [], function (tran, data) {
-					//drivername carname
-					if (!document.getElementById(`${data1.DriverName}${data1.CarName}Label`)) {
-						createNewLabel(data1.CarName, data1.LicenseNumber, data1.DriverName, data1.DescriptionOrder, data);
+				if (data.rows.length) {
+					for (var i = 0; i < data.rows.length; i++) {
+						data1 = data.rows[i];
 					}
-				});
+
+					tran.executeSql(`SELECT * FROM Products WHERE CarID=${id}`, [], function (tran, data) {
+						//drivername carname
+						if (data.rows.length) {
+							if (!document.getElementById(`${data1.DriverName}${data1.CarName}Label`)) {
+								createNewLabel(data1.CarName, data1.LicenseNumber, data1.DriverName, data1.DescriptionOrder, data);
+							}
+						}
+					});
+				}
 			});
 		});
 	}
