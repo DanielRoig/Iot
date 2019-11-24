@@ -1,0 +1,27 @@
+.navbar,
+.jumbotron {
+    background: #50a8ff;
+}
+
+.jumbotron {
+    min-height: 700px;
+}
+
+body {
+    background-color: #e0e9f3;
+}
+
+h2 {
+    color: whitesmoke;
+}
+
+#logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 30px;
+    color: whitesmoke;
+}
+
+#iconLogo {
+    height: 20%;
+    width: 20%;
+}
