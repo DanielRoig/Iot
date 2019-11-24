@@ -63,7 +63,7 @@ function createNewDetail(CarName, LicenseNumber, DriverName, Description, Produc
     var drivername = $(e.relatedTarget).data('drivername');
     var dataID = $(e.relatedTarget).data('id');
 
-    $(e.currentTarget).find('div[class="modal-body"]').text(drivername);
+    //$(e.currentTarget).find('div[class="modal-body"]').text(drivername);
 
     $(e.currentTarget).find('button[class="btn btn-success done"]').attr("data-id", dataID);
 
@@ -76,7 +76,7 @@ function createNewDetail(CarName, LicenseNumber, DriverName, Description, Produc
     var drivername = $(e.relatedTarget).data('drivername');
     var dataID = $(e.relatedTarget).data('id');
 
-    $(e.currentTarget).find('div[class="modal-body"]').text(drivername);
+    //$(e.currentTarget).find('div[class="modal-body"]').text(drivername);
 
     $(e.currentTarget).find('button[class="btn btn-danger delete"]').attr("data-id", dataID);
 
