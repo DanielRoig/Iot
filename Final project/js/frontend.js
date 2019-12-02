@@ -23,7 +23,6 @@ function createNewLabel(CarName, LicenseNumber, DriverName, Description, Product
 }
 
 
-
 function createNewDetail(CarName, LicenseNumber, DriverName, Description, ProductArray) {
   var element = document.createElement("a");
   element.className = "tab-pane fade";
@@ -63,8 +62,6 @@ function createNewDetail(CarName, LicenseNumber, DriverName, Description, Produc
     var drivername = $(e.relatedTarget).data('drivername');
     var dataID = $(e.relatedTarget).data('id');
 
-    //$(e.currentTarget).find('div[class="modal-body"]').text(drivername);
-
     $(e.currentTarget).find('button[class="btn btn-success done"]').attr("data-id", dataID);
 
     $(e.currentTarget).find('button[class="btn btn-success done"]').val(drivername);
@@ -76,17 +73,13 @@ function createNewDetail(CarName, LicenseNumber, DriverName, Description, Produc
     var drivername = $(e.relatedTarget).data('drivername');
     var dataID = $(e.relatedTarget).data('id');
 
-    //$(e.currentTarget).find('div[class="modal-body"]').text(drivername);
-
     $(e.currentTarget).find('button[class="btn btn-danger delete"]').attr("data-id", dataID);
 
     $(e.currentTarget).find('button[class="btn btn-danger delete"]').val(drivername);
 
   });
-
-
-
 }
+
 
 function deleteFromDB(name, dataId) {
   var id;
@@ -103,6 +96,7 @@ function deleteFromDB(name, dataId) {
     });
   });
 }
+
 
 function deleteFromFrontEnd(dataId) {
   var element1 = document.getElementById(`${dataId}Label`);

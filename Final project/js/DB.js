@@ -89,8 +89,6 @@ async function createDB() {
 		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Green Tea 12-pack", 1, 10)');
 		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Salad", 1, 10)');
 		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Carrot", 3, 10)');
-		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Tomatoes", 6, 10)');
-				
-				
+		tran.executeSql('insert into Products (ProductName, NumProd, CarID) values ("Tomatoes", 6, 10)');	
 	})
 }
